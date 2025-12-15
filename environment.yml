@@ -1,0 +1,12 @@
+name: ambiente_cronometro
+channels:
+  - conda-forge
+dependencies:
+  - python=3.14
+  # e outros pacotes
+  - pip
+  - pip:
+    - -e .
+    - pynput
+    # outros pacotes pip que você usa
+
