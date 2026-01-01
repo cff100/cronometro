@@ -2,11 +2,15 @@ name: ambiente_cronometro
 channels:
   - conda-forge
 dependencies:
-  - python=3.14
+  - python=3.12
+
   # e outros pacotes
   - pip
   - pip:
     - -e .
     - pynput
+    - pytest
+    # - pytest-cov
+    # - coverage
     # outros pacotes pip que você usa
 

@@ -1,22 +1,10 @@
-[build-system]
-requires = ["setuptools>=64", "wheel"]
-build-backend = "setuptools.build_meta"
 
 [project]
-name = "cronometro"
-version = "0.1.0"
-description = "Um simples cronômetro para registro de tempo dedicado à atividades"
+name = "Stopwatch"
+version = "0.1.2"
+description = "A simple stopwatch for recording time spent on activities"
 authors = [{ name = "Caio" }]
 readme = "README.md"
 requires-python = ">=3.10"
-dependencies = [
 
-    ]
-
-[tool.setuptools]
-package-dir = { "" = "src" }
-include-package-data = true
-
-[tool.setuptools.packages.find]
-where = ["src"]
-include = ["*"]
+[tool.pytest]
