@@ -1,13 +1,5 @@
-import os
-import sys
-import time
 import pytest
-
-# Garantir que o diretório src esteja no path para importar o pacote local
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-SRC = os.path.join(ROOT, "src")
-if SRC not in sys.path:
-    sys.path.insert(0, SRC)
+import time
 
 from stopwatch.stopwatch import Stopwatch
 

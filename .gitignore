@@ -13,11 +13,12 @@ ENV/
 # VS Code
 .vscode/
 
-# Arquivos de ambiente
+# Environment files
 .env
 
-# Pacote do projeto
+# Project package
 *.egg-info/
 
-# Arquivos de dados processados ignorados
+# Others
+htmlcov
 
