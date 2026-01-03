@@ -9,7 +9,7 @@ def test_initial_state():
     t = Stopwatch()
     assert t.start_time is None
     assert t.elapsed == 0
-    assert t.running is False
+    assert t.is_running is False
     assert t.get_time_elapsed() == 0
 
 
@@ -19,7 +19,7 @@ def test_start_and_get_time_elapsed(monkeypatch):
 
     monkeypatch.setattr(time, "time", lambda: 1000.0)
     t.start()
-    assert t.running is True
+    assert t.is_running is True
     assert t.start_time == 1000.0
 
     monkeypatch.setattr(time, "time", lambda: 1005.2)
@@ -35,7 +35,7 @@ def test_pause_accumulates_and_stops(monkeypatch):
 
     monkeypatch.setattr(time, "time", lambda: 1003.0)
     t.pause()
-    assert t.running is False
+    assert t.is_running is False
     assert pytest.approx(t.elapsed, rel=1e-6) == 3.0
     assert pytest.approx(t.get_time_elapsed(), rel=1e-6) == 3.0
 
@@ -57,7 +57,7 @@ def test_reset_clears_state(monkeypatch):
     t.reset()
     assert t.start_time is None
     assert t.elapsed == 0
-    assert t.running is False
+    assert t.is_running is False
     assert t.get_time_elapsed() == 0
 
 
@@ -81,4 +81,4 @@ def test_pause_without_start_does_nothing(monkeypatch):
     t.pause()
     assert t.start_time is None
     assert t.elapsed == 0
-    assert t.running is False
+    assert t.is_running is False
