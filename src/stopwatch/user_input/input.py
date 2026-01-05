@@ -14,16 +14,16 @@ from pynput import keyboard
 
 from stopwatch.stopwatch import Stopwatch
 
-def display_time(stop_event: Event, sw: Stopwatch) -> None:
+def display_time(stop_event: Event, stopwatch: Stopwatch) -> None:
     while not stop_event.is_set():
-        if sw.is_running:
-            elapsed = sw.get_time_elapsed()
-            print(f"\rTime elapsed: {elapsed:6.2f} s", end="", flush=True)
+        if stopwatch.is_running:
+            elapsed = stopwatch.get_time_elapsed()
+            print(f"\rTime elapsed: {elapsed:6.2f} s", end="")
         time.sleep(0.1)
         
 
 
-def run_listener(stop_event: Event, sw: Stopwatch) -> None:
+def run_listener(stop_event: Event, stopwatch: Stopwatch) -> None:
     def on_press(key):
         try:
             c = key.char.lower()
@@ -34,14 +34,14 @@ def run_listener(stop_event: Event, sw: Stopwatch) -> None:
             return
 
         if c == "s":
-            sw.start()
+            stopwatch.start()
         elif c == "p":
-            sw.pause()
+            stopwatch.pause()
         elif c == "r":
-            sw.reset()
+            stopwatch.reset()
             print("\rTime elapsed:   0.00 s", end="", flush=True)
         elif c == "g":
-            print(f"\nTime elapsed: {sw.get_time_elapsed():.2f} s")
+            print(f"\nTime obtained: {stopwatch.get_time_elapsed():6.2f} s")
         else:
             print("\nKey not accepted.")
 
@@ -50,17 +50,17 @@ def run_listener(stop_event: Event, sw: Stopwatch) -> None:
 
 
 def main():
-    sw = Stopwatch()        
+    stopwatch = Stopwatch()        
     stop_event = Event()
 
     display_thread = Thread(
         target=display_time,
-        args=(stop_event, sw),
+        args=(stop_event, stopwatch),
         daemon=True
     )
     display_thread.start()
 
-    run_listener(stop_event, sw)
+    run_listener(stop_event, stopwatch)
 
 if __name__ == "__main__":
     main()
