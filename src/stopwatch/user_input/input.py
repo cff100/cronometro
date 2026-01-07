@@ -8,61 +8,32 @@ Atalhos:
 - Esc: quit
 """
 
-import time
-from threading import Event, Thread
-from pynput import keyboard
-
+from threading import Event
 from stopwatch.stopwatch import Stopwatch
+from stopwatch.user_input.display import Display
+from stopwatch.user_input.listener import KeyListener
 
-def display_time(stop_event: Event, stopwatch: Stopwatch) -> None:
-    while not stop_event.is_set():
-        if stopwatch.is_running:
-            elapsed = stopwatch.get_time_elapsed()
-            print(f"\r\033[KTime elapsed: {elapsed:.2f} s", end="")
-        time.sleep(0.1)
-        
+# sppssrasspggqsrssrsrsprsrsp
 
-
-def run_listener(stop_event: Event, stopwatch: Stopwatch) -> None:
-    def on_press(key):
-        try:
-            c = key.char.lower()
-        except AttributeError:
-            if key == keyboard.Key.esc:
-                stop_event.set()
-                listener.stop()
-            return
-
-        if c == "s":
-            stopwatch.start()
-        elif c == "p":
-            stopwatch.pause()
-        elif c == "r":
-            stopwatch.reset()
-            print(f"\r\033[KTime elapsed: {stopwatch.elapsed:.2f} s", end="")
-        elif c == "g":
-            print(f"\nTime obtained: {stopwatch.get_time_elapsed():.2f} s")
-        else:
-            print("\nKey not accepted.")
-
-    with keyboard.Listener(on_press=on_press) as listener:
-        print("\nInício do listener!")
-        listener.join()
-        print("\nFim do listener!")
-#srasrspsrsrsrspsgspsgrssrpgggggggssrsrspspgsgsraspwpsrspsfr
-
-def main():
-    stopwatch = Stopwatch()        
+def main() -> None:
+    """Prepara e executa o display e o listener de teclado."""
+    stopwatch = Stopwatch()
     stop_event = Event()
 
-    display_thread = Thread(
-        target=display_time,
-        args=(stop_event, stopwatch),
-        daemon=True
-    )
-    display_thread.start()
+    print("\nInício do listener!")
+    
+    display = Display(stop_event, stopwatch)
+    display.start()
 
-    run_listener(stop_event, stopwatch)
+    listener = KeyListener(stop_event, stopwatch)
+    try:
+        listener.run()
+    finally:
+        # garante que o display seja finalizado ao sair do listener
+        stop_event.set()
+        display.stop()
+
+    print("\n\nFim do listener!")
 
 if __name__ == "__main__":
     main()
