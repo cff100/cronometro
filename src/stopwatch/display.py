@@ -20,9 +20,12 @@ class Display:
 
             else:
                 print(f"\r\033[KTime elapsed: {self.stopwatch.elapsed:.2f} s", end="")
-                pass
             time.sleep(self.interval)
 
+    def show_time(self) -> None:
+        """Imprime o tempo decorrido em uma nova linha ."""
+        elapsed = self.stopwatch.get_time_elapsed()
+        print(f"\nTempo decorrido: {elapsed:.2f} s")
 
     def start(self) -> None:
         self._thread.start()

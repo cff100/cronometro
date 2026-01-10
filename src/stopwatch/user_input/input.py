@@ -13,7 +13,7 @@ from stopwatch.stopwatch import Stopwatch
 from stopwatch.display import Display
 from stopwatch.user_input.listener import KeyListener
 
-# 
+# psrsgpgspgsg
 
 def main() -> None:
     """Prepara e executa o display e o listener de teclado."""
@@ -25,7 +25,7 @@ def main() -> None:
     display = Display(stop_event, stopwatch)
     display.start()
 
-    listener = KeyListener(stop_event, stopwatch)
+    listener = KeyListener(stop_event, stopwatch, display)
     try:
         listener.run()
     finally:

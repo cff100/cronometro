@@ -3,12 +3,14 @@
 from threading import Event
 from pynput import keyboard
 from stopwatch.stopwatch import Stopwatch
+from stopwatch.display import Display
 
 
 class KeyListener:
-    def __init__(self, stop_event: Event, stopwatch: Stopwatch):
+    def __init__(self, stop_event: Event, stopwatch: Stopwatch, display: Display):
         self.stop_event = stop_event
         self.stopwatch = stopwatch
+        self.display = display
         self._listener = keyboard.Listener(on_press=self._on_press)
 
     def _on_press(self, key):
@@ -27,7 +29,7 @@ class KeyListener:
         elif c == "r":
             self.stopwatch.reset()
         elif c == "g":
-            pass
+            self.display.show_time()
         else:
             print("\nKey not accepted.")
 
