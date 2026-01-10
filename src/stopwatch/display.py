@@ -3,7 +3,6 @@
 import time
 from threading import Event, Thread
 from stopwatch.stopwatch import Stopwatch
-from stopwatch.user_input.listener import KeyListener
 
 class Display:
     def __init__(self, stop_event: Event, stopwatch: Stopwatch, interval: float = 0.1):

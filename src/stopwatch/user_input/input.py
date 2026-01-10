@@ -10,10 +10,10 @@ Atalhos:
 
 from threading import Event
 from stopwatch.stopwatch import Stopwatch
-from stopwatch.user_input.display import Display
+from stopwatch.display import Display
 from stopwatch.user_input.listener import KeyListener
 
-# sppssrasspggqsrssrsrsprsrsp
+# 
 
 def main() -> None:
     """Prepara e executa o display e o listener de teclado."""
@@ -29,11 +29,10 @@ def main() -> None:
     try:
         listener.run()
     finally:
-        # garante que o display seja finalizado ao sair do listener
         stop_event.set()
         display.stop()
 
-    print("\n\nFim do listener!")
+    print("\n\nFim do listener!\n")
 
 if __name__ == "__main__":
     main()
