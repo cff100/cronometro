@@ -4,17 +4,8 @@ __pycache__/
 *.py[cod]
 .pytest_cache/
 
-# Virtual environment
-env/
-venv/
-.venv/
-ENV/
-
 # VS Code
 .vscode/
-
-# Environment files
-.env
 
 # Project package
 *.egg-info/
